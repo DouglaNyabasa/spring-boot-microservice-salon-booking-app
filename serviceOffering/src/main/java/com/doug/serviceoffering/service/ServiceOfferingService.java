@@ -13,7 +13,7 @@ public interface ServiceOfferingService {
 
     ServiceOffering updateService(Long serviceId,ServiceOffering service) throws Exception;
 
-    Set<ServiceOffering> getAllServiceBySalon(Long salonId);
+    Set<ServiceOffering> getAllServiceBySalon(Long salonId,Long categoryId);
 
     Set<ServiceOffering> getServiceByIds(Set<Long> ids);
 }

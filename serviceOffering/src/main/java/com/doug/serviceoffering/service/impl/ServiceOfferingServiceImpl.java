@@ -9,6 +9,7 @@ import com.doug.serviceoffering.service.ServiceOfferingService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceOfferingServiceImpl implements ServiceOfferingService {
@@ -49,8 +50,12 @@ public class ServiceOfferingServiceImpl implements ServiceOfferingService {
     }
 
     @Override
-    public Set<ServiceOffering> getAllServiceBySalon(Long salonId) {
-        return Set.of();
+    public Set<ServiceOffering> getAllServiceBySalon(Long salonId,Long categoryId) {
+        Set<ServiceOffering> services = serviceOfferingRepository.findBySalonId(salonId);
+        if (categoryId != null){
+            services = services.stream().filter((service)-> service.getCategoryId() != null && service.getCategoryId() == categoryId).collect(Collectors.toSet());
+        }
+        return services;
     }
 
     @Override
