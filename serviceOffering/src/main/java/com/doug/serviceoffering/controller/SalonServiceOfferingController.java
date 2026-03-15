@@ -27,7 +27,7 @@ public class SalonServiceOfferingController {
         salonDT0.setId(1L);
 
         CategoryDTO categoryDTO = new CategoryDTO();
-        categoryDTO.setId(serviceDTO.getCategoryId());
+        categoryDTO.setId(serviceDTO.getCategory());
 
         ServiceOffering serviceOffering = serviceOfferingService.createService(salonDT0,serviceDTO,categoryDTO);
         return ResponseEntity.ok(serviceOffering);
