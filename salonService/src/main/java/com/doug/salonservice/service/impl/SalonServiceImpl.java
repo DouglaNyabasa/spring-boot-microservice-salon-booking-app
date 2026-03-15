@@ -52,6 +52,7 @@ public class SalonServiceImpl implements SalonService {
             existingSalon.setOpenTime(salonDT0.getOpenTime());
             existingSalon.setCloseTime(salonDT0.getCloseTime());
             existingSalon.setPhoneNumber(salonDT0.getPhoneNumber());
+            return salonRepository.save(existingSalon);
 
 
         }

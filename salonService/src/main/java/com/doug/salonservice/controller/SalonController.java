@@ -31,8 +31,8 @@ public class SalonController {
        return ResponseEntity.ok(salonDT1);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<SalonDT0> updateSalon(@PathVariable("id") Long salonId,  @RequestBody SalonDT0 salonDT0) throws Exception {
+    @PutMapping("/{salonId}")
+    public ResponseEntity<SalonDT0> updateSalon(@PathVariable Long salonId,  @RequestBody SalonDT0 salonDT0) throws Exception {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
         Salon salon = salonService.updateSalon(salonDT0, userDTO,salonId);
