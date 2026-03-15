@@ -6,10 +6,9 @@ import com.doug.salonservice.payload.dto.SalonDT0;
 import com.doug.salonservice.payload.dto.UserDTO;
 import com.doug.salonservice.service.SalonService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/salons")
@@ -29,6 +28,28 @@ public class SalonController {
         SalonDT0 salonDT1 = SalonMapper.mapToDTO(salon);
 
        return ResponseEntity.ok(salonDT1);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<SalonDT0> updateSalon(@PathVariable("id") Long salonId,  @RequestBody SalonDT0 salonDT0) throws Exception {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+        Salon salon = salonService.updateSalon(salonDT0, userDTO,salonId);
+        SalonDT0 salonDT1 = SalonMapper.mapToDTO(salon);
+
+        return ResponseEntity.ok(salonDT1);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<SalonDT0>> getSalons() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+        List<Salon> salons = salonService.getAllSalons();
+        List<SalonDT0> salonDT0s = salons.stream().map((salon)->{
+            SalonDT0 salonDT0 = SalonMapper.mapToDTO(salon);
+            return salonDT0;
+        }).toList();
+        return ResponseEntity.ok(salonDT0s);
     }
 
 
