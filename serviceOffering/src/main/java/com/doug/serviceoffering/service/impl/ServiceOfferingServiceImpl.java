@@ -8,6 +8,8 @@ import com.doug.serviceoffering.repository.ServiceOfferingRepository;
 import com.doug.serviceoffering.service.ServiceOfferingService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -60,6 +62,7 @@ public class ServiceOfferingServiceImpl implements ServiceOfferingService {
 
     @Override
     public Set<ServiceOffering> getServiceByIds(Set<Long> ids) {
-        return Set.of();
+        List<ServiceOffering> services = serviceOfferingRepository.findAllById(ids);
+        return new HashSet<>(services);
     }
 }
