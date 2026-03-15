@@ -25,8 +25,19 @@ public class SalonCategoryController {
         SalonDT0 salonDT0 = new SalonDT0();
         salonDT0.setId(1L);
 
-        Category categories = categoryService.createCategory(category, salonDT0);
+        Category savedCategory = categoryService.createCategory(category, salonDT0);
 
-        return ResponseEntity.ok(categories);
+        return ResponseEntity.ok(savedCategory);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable Long id) throws Exception {
+
+        SalonDT0 salonDT0 = new SalonDT0();
+        salonDT0.setId(1L);
+
+         categoryService.deleteCategoryById(id, salonDT0.getId());
+
+         return ResponseEntity.ok("category successfully deleted");
     }
 }
