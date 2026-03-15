@@ -1,6 +1,5 @@
 package com.doug.serviceoffering.payload;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
