@@ -41,7 +41,7 @@ public class SalonController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<SalonDT0>> getSalons() {
+    public ResponseEntity<List<SalonDT0>> getAllSalons() {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
         List<Salon> salons = salonService.getAllSalons();
@@ -50,6 +50,16 @@ public class SalonController {
             return salonDT0;
         }).toList();
         return ResponseEntity.ok(salonDT0s);
+    }
+
+    @GetMapping("/{salonId}")
+    public ResponseEntity<SalonDT0> getSalonsById(@PathVariable Long salonId) throws Exception {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+        Salon salon = salonService.getSalonById(salonId);
+        SalonDT0 salonDT0 = SalonMapper.mapToDTO(salon);
+
+        return ResponseEntity.ok(salonDT0);
     }
 
 
