@@ -35,8 +35,23 @@ public class SalonServiceImpl implements SalonService {
     }
 
     @Override
-    public Salon updateSalon(SalonDT0 salon, UserDTO user, Long salonId) {
-        return null;
+    public Salon updateSalon(SalonDT0 salonDT0, UserDTO userDTO, Long salonId) throws Exception {
+
+        Salon existingSalon  = salonRepository.findById(salonId).orElse(null);
+        if (existingSalon != null && salonDT0.getOwnerId().equals(userDTO.getId())){
+            existingSalon.setCity(salonDT0.getCity());
+            existingSalon.setName(salonDT0.getName());
+            existingSalon.setAddress(salonDT0.getAddress());
+            existingSalon.setEmail(salonDT0.getEmail());
+            existingSalon.setImages(salonDT0.getImages());
+            existingSalon.setOwnerId(userDTO.getId());
+            existingSalon.setOpenTime(salonDT0.getOpenTime());
+            existingSalon.setCloseTime(salonDT0.getCloseTime());
+            existingSalon.setPhoneNumber(salonDT0.getPhoneNumber());
+
+
+        }
+        throw new Exception("Salon does not exist");
     }
 
     @Override
