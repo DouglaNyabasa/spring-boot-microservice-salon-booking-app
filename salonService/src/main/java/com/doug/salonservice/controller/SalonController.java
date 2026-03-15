@@ -62,5 +62,19 @@ public class SalonController {
         return ResponseEntity.ok(salonDT0);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<SalonDT0>> searchSalons(
+            @RequestParam("city") String city
+    ) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+        List<Salon> salons = salonService.searchSalonByCityName(city);
+        List<SalonDT0> salonDT0s = salons.stream().map((salon)->{
+            SalonDT0 salonDT0 = SalonMapper.mapToDTO(salon);
+            return salonDT0;
+        }).toList();
+        return ResponseEntity.ok(salonDT0s);
+    }
+
 
 }
