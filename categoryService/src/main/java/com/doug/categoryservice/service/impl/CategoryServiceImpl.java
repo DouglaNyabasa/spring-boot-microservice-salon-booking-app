@@ -18,7 +18,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category createCategory(Category category, SalonDT0 salonDTO) {
-        return null;
+        Category category1 = new Category();
+        category1.setName(category.getName());
+        category1.setSalonId(category.getSalonId());
+        category1.setImage(category.getImage());
+        return categoryRepository.save(category1);
     }
 
     @Override
