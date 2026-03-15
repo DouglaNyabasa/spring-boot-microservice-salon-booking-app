@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SalonService {
 
-    Salon createSalon(SalonDT0 salon, UserDTO user);
+    Salon createSalon(SalonDT0 salonDT0, UserDTO userDTO);
 
     Salon updateSalon(SalonDT0 salon, UserDTO user,Long salonId);
 

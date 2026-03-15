@@ -20,8 +20,18 @@ public class SalonServiceImpl implements SalonService {
     }
 
     @Override
-    public Salon createSalon(SalonDT0 salon, UserDTO user) {
-        return null;
+    public Salon createSalon(SalonDT0 salonDT0, UserDTO userDTO) {
+        Salon salon = new Salon();
+        salon.setName(salonDT0.getName());
+        salon.setAddress(salonDT0.getAddress());
+        salon.setEmail(salonDT0.getEmail());
+        salon.setCity(salonDT0.getCity());
+        salon.setImages(salonDT0.getImages());
+        salon.setOwnerId(userDTO.getId());
+        salon.setOpenTime(salonDT0.getOpenTime());
+        salon.setCloseTime(salonDT0.getCloseTime());
+        salon.setPhoneNumber(salonDT0.getPhoneNumber());
+        return salonRepository.save(salon);
     }
 
     @Override
