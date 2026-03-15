@@ -5,6 +5,7 @@ import com.doug.salonservice.models.Salon;
 import com.doug.salonservice.payload.dto.SalonDT0;
 import com.doug.salonservice.payload.dto.UserDTO;
 import com.doug.salonservice.service.SalonService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/salons")
+@RequiredArgsConstructor
 public class SalonController {
 
     private final SalonService salonService;
 
-    public SalonController( SalonService salonService) {
-        this.salonService = salonService;
-    }
+
+
 
     @PostMapping("/create")
     public ResponseEntity<SalonDT0> createSalon(@RequestBody SalonDT0 salonDT0){
@@ -42,8 +43,6 @@ public class SalonController {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<SalonDT0>> getAllSalons() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(1L);
         List<Salon> salons = salonService.getAllSalons();
         List<SalonDT0> salonDT0s = salons.stream().map((salon)->{
             SalonDT0 salonDT0 = SalonMapper.mapToDTO(salon);
@@ -54,8 +53,6 @@ public class SalonController {
 
     @GetMapping("/{salonId}")
     public ResponseEntity<SalonDT0> getSalonsById(@PathVariable Long salonId) throws Exception {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(1L);
         Salon salon = salonService.getSalonById(salonId);
         SalonDT0 salonDT0 = SalonMapper.mapToDTO(salon);
 
@@ -66,14 +63,22 @@ public class SalonController {
     public ResponseEntity<List<SalonDT0>> searchSalons(
             @RequestParam("city") String city
     ) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(1L);
         List<Salon> salons = salonService.searchSalonByCityName(city);
         List<SalonDT0> salonDT0s = salons.stream().map((salon)->{
             SalonDT0 salonDT0 = SalonMapper.mapToDTO(salon);
             return salonDT0;
         }).toList();
         return ResponseEntity.ok(salonDT0s);
+    }
+
+    @GetMapping("/owner")
+    public ResponseEntity<SalonDT0> getSalonsByOwnerId(@PathVariable Long salonId) throws Exception {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+        Salon salon = salonService.getSalonByOwnerId(userDTO.getId());
+        SalonDT0 salonDT0 = SalonMapper.mapToDTO(salon);
+
+        return ResponseEntity.ok(salonDT0);
     }
 
 

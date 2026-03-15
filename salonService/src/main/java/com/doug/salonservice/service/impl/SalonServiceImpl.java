@@ -5,19 +5,20 @@ import com.doug.salonservice.payload.dto.SalonDT0;
 import com.doug.salonservice.payload.dto.UserDTO;
 import com.doug.salonservice.repository.SalonRepository;
 import com.doug.salonservice.service.SalonService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SalonServiceImpl implements SalonService {
 
 
     private final SalonRepository salonRepository;
 
-    public SalonServiceImpl(SalonRepository salonRepository) {
-        this.salonRepository = salonRepository;
-    }
+
+
 
     @Override
     public Salon createSalon(SalonDT0 salonDT0, UserDTO userDTO) {
