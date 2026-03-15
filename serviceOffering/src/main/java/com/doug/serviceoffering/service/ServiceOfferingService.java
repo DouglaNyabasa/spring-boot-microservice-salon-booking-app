@@ -11,7 +11,7 @@ public interface ServiceOfferingService {
 
     ServiceOffering createService(SalonDT0 salonDT0, ServiceDTO serviceDTO, CategoryDTO categoryDTO);
 
-    ServiceOffering updateService(Long serviceId,ServiceOffering serviceOffering);
+    ServiceOffering updateService(Long serviceId,ServiceOffering service) throws Exception;
 
     Set<ServiceOffering> getAllServiceBySalon(Long salonId);
 
