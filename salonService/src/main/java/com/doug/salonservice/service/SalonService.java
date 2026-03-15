@@ -13,7 +13,7 @@ public interface SalonService {
     Salon updateSalon(SalonDT0 salonDT0, UserDTO userDTO,Long salonId) throws Exception;
 
     List<Salon> getAllSalons();
-    Salon getSalonById(Long salonId);
+    Salon getSalonById(Long salonId) throws Exception;
     Salon getSalonByOwnerId(Long ownerId);
     List<Salon> searchSalonByCityName(String city);
 
