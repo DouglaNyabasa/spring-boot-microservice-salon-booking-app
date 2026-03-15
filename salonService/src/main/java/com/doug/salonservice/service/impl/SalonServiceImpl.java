@@ -39,7 +39,10 @@ public class SalonServiceImpl implements SalonService {
     public Salon updateSalon(SalonDT0 salonDT0, UserDTO userDTO, Long salonId) throws Exception {
 
         Salon existingSalon  = salonRepository.findById(salonId).orElse(null);
-        if (existingSalon != null && salonDT0.getOwnerId().equals(userDTO.getId())){
+        if (!salonDT0.getOwnerId().equals(userDTO.getId())){
+            throw new Exception("you do not have permission to update this salon");
+        }
+        if (existingSalon != null ){
             existingSalon.setCity(salonDT0.getCity());
             existingSalon.setName(salonDT0.getName());
             existingSalon.setAddress(salonDT0.getAddress());
