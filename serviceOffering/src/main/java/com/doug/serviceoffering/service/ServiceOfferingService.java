@@ -7,7 +7,7 @@ import com.doug.serviceoffering.payload.ServiceDTO;
 
 import java.util.Set;
 
-public interface serviceOfferingService {
+public interface ServiceOfferingService {
 
     ServiceOffering createService(SalonDT0 salonDT0, ServiceDTO serviceDTO, CategoryDTO categoryDTO);
 
