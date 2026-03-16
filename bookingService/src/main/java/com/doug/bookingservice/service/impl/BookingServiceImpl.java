@@ -80,7 +80,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> getBookingsBySalon(Long id) {
 
-        return null;
+        return bookingRepository.findBySalonId(id);
     }
 
     @Override
@@ -93,8 +93,10 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking updateBookingStatus(Long bookingId, BookingStatus status) {
-        return null;
+    public Booking updateBookingStatus(Long bookingId, BookingStatus status) throws Exception {
+        Booking booking = getBookingById(bookingId);
+        booking.setStatus(status);
+        return bookingRepository.save(booking);
     }
 
     @Override
