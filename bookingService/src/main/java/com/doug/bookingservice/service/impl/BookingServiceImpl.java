@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -22,19 +23,30 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking createBooking(BookingRequest booking, UserDTO userDTO, SalonDT0 salonDT0, Set<ServiceDTO> serviceDTOSet) {
+    public Booking createBooking(BookingRequest booking, UserDTO userDTO, SalonDT0 salonDT0, Set<ServiceDTO> serviceDTOSet) throws Exception {
 
         int totalDuration = serviceDTOSet.stream()
                 .mapToInt(ServiceDTO::getDuration)
                 .sum();
         LocalDateTime bookingStartTime = booking.getStartTime();
         LocalDateTime bookingEndTime = bookingStartTime.plusMinutes(totalDuration);
-        Boolean isTimeSlotAvailable = isTimeSlotAvailable(salonDT0,bookingStartTime,bookingEndTime);
+        Boolean isSlotAvailable = isTimeSlotAvailable(salonDT0,bookingStartTime,bookingEndTime);
 
+        int totalPrice = serviceDTOSet.stream()
+                .mapToInt(ServiceDTO::getPrice)
+                .sum();
+        Set<Long> idList = serviceDTOSet.stream().map(ServiceDTO::getId).collect(Collectors.toSet());
+        Booking newBooking = new Booking();
+        newBooking.setCustomerId(userDTO.getId());
+        newBooking.setSalonId(salonDT0.getId());
+        newBooking.setServiceIds(idList);
+        newBooking.setStatus(BookingStatus.PENDING);
+        newBooking.setStartTime(bookingStartTime);
+        newBooking.setEndTime(bookingEndTime);
+        newBooking.setTotalPrice(totalPrice);
 
-        return null;
+        return bookingRepository.save(newBooking);
     }
-
     public Boolean isTimeSlotAvailable(SalonDT0 salonDT0,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime) throws Exception {
 
       List<Booking> existingBookings = getBookingsBySalon(salonDT0.getId());

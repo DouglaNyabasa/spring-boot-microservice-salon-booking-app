@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface BookingService {
-    Booking createBooking(BookingRequest booking, UserDTO userDTO, SalonDT0 salonDT0, Set<ServiceDTO> serviceDTOSet);
+    Booking createBooking(BookingRequest booking, UserDTO userDTO, SalonDT0 salonDT0, Set<ServiceDTO> serviceDTOSet) throws Exception;
     List<Booking> getBookingsByCustomer(Long customerId);
     List<Booking> getBookingsBySalon(Long salonId);
     Booking getBookingById(Long id);
