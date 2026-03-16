@@ -74,16 +74,21 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getBookingsByCustomer(Long customerId) {
-        return List.of();
+        return bookingRepository.findByCustomerId(customerId);
     }
 
     @Override
-    public List<Booking> getBookingsBySalon(Long salonId) {
-        return List.of();
+    public List<Booking> getBookingsBySalon(Long id) {
+
+        return null;
     }
 
     @Override
-    public Booking getBookingById(Long id) {
+    public Booking getBookingById(Long id) throws Exception {
+        Booking booking = bookingRepository.findById(id).orElse(null);
+        if (booking == null){
+            throw new Exception("booking not found");
+        }
         return null;
     }
 

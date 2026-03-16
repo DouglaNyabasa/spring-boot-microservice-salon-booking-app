@@ -12,7 +12,7 @@ public interface BookingService {
     Booking createBooking(BookingRequest booking, UserDTO userDTO, SalonDT0 salonDT0, Set<ServiceDTO> serviceDTOSet) throws Exception;
     List<Booking> getBookingsByCustomer(Long customerId);
     List<Booking> getBookingsBySalon(Long salonId);
-    Booking getBookingById(Long id);
+    Booking getBookingById(Long id) throws Exception;
     Booking updateBookingStatus(Long bookingId, BookingStatus status);
     List<Booking> getBookingsByDate(LocalDate date, Long salonId);
 
