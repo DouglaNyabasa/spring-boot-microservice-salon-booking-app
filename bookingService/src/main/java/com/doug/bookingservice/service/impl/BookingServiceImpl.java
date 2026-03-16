@@ -8,6 +8,7 @@ import com.doug.bookingservice.service.BookingService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,41 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking createBooking(BookingRequest booking, UserDTO userDTO, SalonDT0 salonDT0, Set<ServiceDTO> serviceDTOSet) {
+
+        int totalDuration = serviceDTOSet.stream()
+                .mapToInt(ServiceDTO::getDuration)
+                .sum();
+        LocalDateTime bookingStartTime = booking.getStartTime();
+        LocalDateTime bookingEndTime = bookingStartTime.plusMinutes(totalDuration);
+        Boolean isTimeSlotAvailable = isTimeSlotAvailable(salonDT0,bookingStartTime,bookingEndTime);
+
+
         return null;
+    }
+
+    public Boolean isTimeSlotAvailable(SalonDT0 salonDT0,LocalDateTime bookingStartTime,LocalDateTime bookingEndTime) throws Exception {
+
+      List<Booking> existingBookings = getBookingsBySalon(salonDT0.getId());
+     LocalDateTime salonOpenTime = salonDT0.getOpenTime().atDate(bookingStartTime.toLocalDate());
+     LocalDateTime salonCloseTime = salonDT0.getCloseTime().atDate(bookingEndTime.toLocalDate());
+
+     if (bookingStartTime.isBefore(salonOpenTime) || bookingEndTime.isAfter(salonCloseTime)){
+         throw new Exception("booking time must be within the salon working hours");
+     }
+     for (Booking existingBooking : existingBookings){
+         LocalDateTime existingBookingStartTime = existingBooking.getStartTime();
+         LocalDateTime existingBookingEndTime = existingBooking.getEndTime();
+
+         if (bookingStartTime.isBefore(existingBookingEndTime) && bookingEndTime.isAfter(existingBookingStartTime)){
+             throw new Exception("slot not available, choose a different time.");
+
+         }
+
+         if (bookingStartTime.isEqual(existingBookingStartTime) || bookingEndTime.isEqual(existingBookingEndTime)){
+             throw new Exception("slot not available, choose a different time.");
+         }
+     }
+        return true;
     }
 
     @Override
