@@ -1,0 +1,23 @@
+#spring.application.name=bookingService
+
+#spring.application.name=salonService
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookingDB
+    username: postgres
+    password: ADMIN
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  security:
+    oauth2:
+      client:
+server:
+  port: 8081

@@ -1,4 +1,4 @@
-package com.doug.paymentservice.payload;
+package com.doug.bookingservice.payload;
 
 import lombok.Data;
 

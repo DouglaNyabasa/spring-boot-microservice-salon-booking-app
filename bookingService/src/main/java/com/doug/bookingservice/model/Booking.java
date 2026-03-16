@@ -1,16 +1,16 @@
-package com.doug.paymentservice.model;
+package com.doug.bookingservice.model;
 
-import com.doug.paymentservice.domain.BookingStatus;
+import com.doug.bookingservice.domain.BookingStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-
 @Entity
 @Table(name = "bookings")
 @Data
 public class Booking {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
