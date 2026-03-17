@@ -8,6 +8,7 @@ import com.doug.bookingservice.service.BookingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -70,7 +71,20 @@ public class BookingController {
 
     }
 
+    @GetMapping("/slots/salon/{salonId}/date/{date}")
+    public ResponseEntity<List<BookingSlotDTO>> getBookedSlot(@PathVariable Long salonId , @RequestParam LocalDate date) throws Exception {
 
+        List <Booking> bookings = bookingService.getBookingsByDate(date,salonId);
+
+        List<BookingSlotDTO> slotDTOS= bookings.stream().map(booking -> {
+            BookingSlotDTO slotDTO = new BookingSlotDTO();
+            slotDTO.setStartTime(booking.getStartTime());
+            slotDTO.setStartTime(booking.getEndTime());
+            return slotDTO;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(slotDTOS);
+
+    }
 
     @PutMapping("/status/{bookingId}")
     public ResponseEntity<BookingDTO> updateBookingStatus(@PathVariable Long bookingId, @RequestParam BookingStatus status) throws Exception {
