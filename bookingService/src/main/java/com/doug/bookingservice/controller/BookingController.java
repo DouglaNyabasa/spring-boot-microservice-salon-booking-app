@@ -1,5 +1,6 @@
 package com.doug.bookingservice.controller;
 
+import com.doug.bookingservice.domain.BookingStatus;
 import com.doug.bookingservice.mapper.BookingMapper;
 import com.doug.bookingservice.model.Booking;
 import com.doug.bookingservice.payload.*;
@@ -60,10 +61,32 @@ public class BookingController {
 
     }
 
+    @GetMapping("/{bookingId}")
+    public ResponseEntity<BookingDTO> getBookingsById(@PathVariable Long bookingId) throws Exception {
+
+        Booking booking = bookingService.getBookingById(bookingId);
+
+        return ResponseEntity.ok(BookingMapper.toDTO(booking));
+
+    }
+
+
+
+    @PutMapping("/status/{bookingId}")
+    public ResponseEntity<BookingDTO> updateBookingStatus(@PathVariable Long bookingId, @RequestParam BookingStatus status) throws Exception {
+
+        Booking booking = bookingService.updateBookingStatus(bookingId,status);
+
+        return ResponseEntity.ok(BookingMapper.toDTO(booking));
+
+    }
+
     private Set<BookingDTO> getBookingDTOs(List<Booking> bookings){
         return bookings.stream().map(booking -> {return BookingMapper.toDTO(booking);
         }).collect(Collectors.toSet());
     }
+
+
 
 
 
