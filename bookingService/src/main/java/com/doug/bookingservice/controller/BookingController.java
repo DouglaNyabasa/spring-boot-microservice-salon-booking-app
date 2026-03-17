@@ -71,8 +71,17 @@ public class BookingController {
 
     }
 
+    @GetMapping("/report")
+    public ResponseEntity<SalonReport> getSalonReport() throws Exception {
+
+         SalonReport salonReport = bookingService.getSalonReport(1L);
+
+        return ResponseEntity.ok(null);
+
+    }
+
     @GetMapping("/slots/salon/{salonId}/date/{date}")
-    public ResponseEntity<List<BookingSlotDTO>> getBookedSlot(@PathVariable Long salonId , @RequestParam LocalDate date) throws Exception {
+    public ResponseEntity<List<BookingSlotDTO>> getBookedSlot(@PathVariable Long salonId , @RequestParam(required = false) LocalDate date) throws Exception {
 
         List <Booking> bookings = bookingService.getBookingsByDate(date,salonId);
 
