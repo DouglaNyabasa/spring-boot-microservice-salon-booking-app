@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +32,12 @@ public class BookingController {
         userDTO.setId(1L);
         SalonDT0 salonDT0 = new SalonDT0();
         salonDT0.setId(salonId );
+        salonDT0.setOpenTime(LocalTime.now());
+        salonDT0.setCloseTime(LocalTime.now().plusHours(12));
+
+
+
+
         Set<ServiceDTO> serviceDTOSet = new HashSet<>();
         ServiceDTO serviceDTO = new ServiceDTO();
         serviceDTO.setId(1L);
