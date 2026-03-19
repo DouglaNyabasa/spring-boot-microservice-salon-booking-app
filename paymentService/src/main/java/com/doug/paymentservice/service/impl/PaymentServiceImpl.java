@@ -1,6 +1,7 @@
 package com.doug.paymentservice.service.impl;
 
 import com.doug.paymentservice.domain.PaymentMethod;
+import com.doug.paymentservice.domain.PaymentOrderStatus;
 import com.doug.paymentservice.model.PaymentOrder;
 import com.doug.paymentservice.payload.BookingDTO;
 import com.doug.paymentservice.payload.Response.PaymentLinkResponse;
@@ -84,5 +85,15 @@ public class PaymentServiceImpl implements PaymentService {
 
         Session session = Session.create(params);
         return session.getUrl();
+    }
+
+    @Override
+    public Boolean proceedPayment(PaymentOrder paymentOrder, String paymentId, String paymentLinkId) {
+        if (paymentOrder.getStatus().equals(PaymentOrderStatus.PENDING)){
+            paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
+            paymentOrderRepository.save(paymentOrder);
+            return true;
+        }
+        return false;
     }
 }
