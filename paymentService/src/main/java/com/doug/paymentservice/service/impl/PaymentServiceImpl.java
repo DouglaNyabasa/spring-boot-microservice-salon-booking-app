@@ -7,10 +7,9 @@ import com.doug.paymentservice.payload.Response.PaymentLinkResponse;
 import com.doug.paymentservice.payload.UserDTO;
 import com.doug.paymentservice.repository.PaymentOrderRepository;
 import com.doug.paymentservice.service.PaymentService;
-
-import com.stripe.model.PaymentLink;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -43,8 +42,13 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentOrder getPaymentOrderById(Long id) {
-        return null;
+    public PaymentOrder getPaymentOrderById(Long id) throws Exception {
+        PaymentOrder paymentOrder = paymentOrderRepository.findById(id).orElse(null);
+        if(paymentOrder == null){
+            throw new Exception("payment order not found");
+        }
+
+        return paymentOrder;
     }
 
     @Override

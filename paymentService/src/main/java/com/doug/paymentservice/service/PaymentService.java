@@ -10,7 +10,7 @@ import com.stripe.model.PaymentLink;
 public interface PaymentService {
 
  PaymentLinkResponse createOrder(UserDTO userDT0, BookingDTO bookingDTO, PaymentMethod paymentMethod);
- PaymentOrder getPaymentOrderById(Long id);
+ PaymentOrder getPaymentOrderById(Long id) throws Exception;
  PaymentOrder getPaymentOrderByPaymentId(String paymentId);
  String  createStripePaymentLink(UserDTO userDTO,Long amount, Long orderId );
 
