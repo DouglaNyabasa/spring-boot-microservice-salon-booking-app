@@ -1,6 +1,7 @@
 package com.doug.paymentservice.controller;
 
 import com.doug.paymentservice.domain.PaymentMethod;
+import com.doug.paymentservice.model.PaymentOrder;
 import com.doug.paymentservice.payload.BookingDTO;
 import com.doug.paymentservice.payload.Response.PaymentLinkResponse;
 import com.doug.paymentservice.payload.UserDTO;
@@ -33,4 +34,15 @@ public class PaymentController {
 
         return  ResponseEntity.ok(res);
     }
+
+    @GetMapping("/{paymentOrderId}")
+    public ResponseEntity<PaymentOrder> getPaymentOrderById(@PathVariable Long paymentOrderId) throws Exception {
+
+
+        PaymentOrder res = paymentService.getPaymentOrderById(paymentOrderId);
+
+        return  ResponseEntity.ok(res);
+    }
+
+
 }
