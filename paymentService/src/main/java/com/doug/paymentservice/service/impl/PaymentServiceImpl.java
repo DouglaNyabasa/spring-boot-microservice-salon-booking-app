@@ -37,7 +37,6 @@ public class PaymentServiceImpl implements PaymentService {
         PaymentOrder savedOrder = paymentOrderRepository.save(order);
         String paymentUrl = createStripePaymentLink(userDT0,savedOrder.getAmount(),savedOrder.getId());
         paymentLinkResponse.setPayment_link_url(paymentUrl);
-
         return paymentLinkResponse;
     }
 
@@ -47,13 +46,12 @@ public class PaymentServiceImpl implements PaymentService {
         if(paymentOrder == null){
             throw new Exception("payment order not found");
         }
-
         return paymentOrder;
     }
 
     @Override
     public PaymentOrder getPaymentOrderByPaymentId(String paymentId) {
-        return null;
+        return paymentOrderRepository.findByPaymentLinkId(paymentId);
     }
 
     @Override
