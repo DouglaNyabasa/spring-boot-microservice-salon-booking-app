@@ -1,6 +1,6 @@
 package com.doug.paymentservice.payload;
 
-import com.doug.bookingservice.domain.BookingStatus;
+import com.doug.paymentservice.domain.BookingStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;

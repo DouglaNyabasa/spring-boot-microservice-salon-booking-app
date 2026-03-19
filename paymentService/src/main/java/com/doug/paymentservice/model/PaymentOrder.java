@@ -4,8 +4,10 @@ import com.doug.paymentservice.domain.PaymentMethod;
 import com.doug.paymentservice.domain.PaymentOrderStatus;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class PaymentOrder {
 
     @Id

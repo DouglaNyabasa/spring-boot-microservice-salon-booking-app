@@ -19,3 +19,7 @@ spring:
       client:
 server:
   port: 8086
+
+stripe:
+  api:
+    key: ${STRIPE_KEY:stripe}
