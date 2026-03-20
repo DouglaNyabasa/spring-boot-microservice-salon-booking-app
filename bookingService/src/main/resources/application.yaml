@@ -1,13 +1,11 @@
 #spring.application.name=bookingService
 
-#spring.application.name=salonService
 
 
 
-# THIS MUST BE AT THE TOP LEVEL OR PROPERLY NESTED
 spring:
   application:
-    name: bookingService # Must be indented properly
+    name: bookingService
   datasource:
     url: jdbc:postgresql://localhost:5432/bookingDB
     username: postgres
@@ -24,8 +22,8 @@ spring:
     security:
       oauth2:
         client:
-  server:
-    port: 8084
+server:
+  port: 8083
 
 eureka:
   instance:
