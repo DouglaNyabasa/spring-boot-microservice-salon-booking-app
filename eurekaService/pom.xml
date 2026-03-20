@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.3</version>
+        <version>4.0.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.doug</groupId>
-    <artifactId>eurekaServer</artifactId>
+    <artifactId>eurekaService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eurekaServer</name>
-    <description>eurekaServer</description>
+    <name>eurekaService</name>
+    <description>eurekaService</description>
     <url/>
     <licenses>
         <license/>
