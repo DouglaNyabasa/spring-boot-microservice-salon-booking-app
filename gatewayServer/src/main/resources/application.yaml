@@ -9,47 +9,48 @@ spring:
         locator:
           enabled: true
       routes:
-        - id : BOOKINGSERVICE
-          url:
-            "lb://BOOKINGSERVICE"
+        - id: BOOKINGSERVICE
+          uri: lb://BOOKINGSERVICE
           predicates:
-            - Path= /api/bookings/**
+            - Path=/api/bookings/**
 
         - id: PAYMENTSERVICE
-          url:
-            "lb://PAYMENTSERVICE"
+          uri: lb://PAYMENTSERVICE
           predicates:
-            - Path= /api/payments/**
+            - Path=/api/payments/**
 
         - id: CATEGORYSERVICE
-          url:
-            "lb://CATEGORYSERVICE"
+          uri: lb://CATEGORYSERVICE
           predicates:
-            - Path= /api/categories/**
-
-        - id: CATEGORYSERVICE
-          url:
-            "lb://CATEGORYSERVICE"
-          predicates:
-            - Path= /api/category/**
+            - Path=/api/categories/**, /api/category/**
 
         - id: SALONSERVICE
-          url:
-            "lb://SALONSERVICE"
+          uri: lb://SALONSERVICE
           predicates:
-            - Path= /api/salons/**
+            - Path=/api/salons/**
 
         - id: SERVICEOFFERING
-          url:
-            "lb://SERVICEOFFERING"
+          uri: lb://SERVICEOFFERING
           predicates:
-            - Path= "=/api/service-offering/**
+            - Path=/api/service-offering/**
+
+#        - id: USERSERVICE
+#          uri: lb://USERSERVICE
+#          predicates:
+#            - Path=/api/users/**, /auth/**, /api/admin/users/**, /users/**
 
         - id: USERSERVICE
-          url:
-            "lb://USERSERVICE"
+          uri: lb://USERSERVICE
           predicates:
-            - Path= /auth/**, /api/admin/users/**, /api/users/**, /users/**
+            - Path=/api/users/**
+            - Path=/auth/**
+            - Path=/api/admin/users/**
+            - Path=/users/**
+
+
+
+
+
 
 
 
