@@ -1,0 +1,73 @@
+
+spring:
+  application:
+    name: gatewayServer
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id : BOOKINGSERVICE
+          url:
+            "lb://BOOKINGSERVICE"
+          predicates:
+            - Path= /api/bookings/**
+
+        - id: PAYMENTSERVICE
+          url:
+            "lb://PAYMENTSERVICE"
+          predicates:
+            - Path= /api/payments/**
+
+        - id: CATEGORYSERVICE
+          url:
+            "lb://CATEGORYSERVICE"
+          predicates:
+            - Path= /api/categories/**
+
+        - id: CATEGORYSERVICE
+          url:
+            "lb://CATEGORYSERVICE"
+          predicates:
+            - Path= /api/category/**
+
+        - id: SALONSERVICE
+          url:
+            "lb://SALONSERVICE"
+          predicates:
+            - Path= /api/salons/**
+
+        - id: SERVICEOFFERING
+          url:
+            "lb://SERVICEOFFERING"
+          predicates:
+            - Path= "=/api/service-offering/**
+
+        - id: USERSERVICE
+          url:
+            "lb://USERSERVICE"
+          predicates:
+            - Path= /auth/**, /api/admin/users/**, /api/users/**, /users/**
+
+
+
+    security:
+      oauth2:
+        client:
+server:
+  port: 9000
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8088/eureka
+stripe:
+  api:
+    key: ${STRIPE_KEY:stripe}

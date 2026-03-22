@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/paymentService/pom.xml" />
         <option value="$PROJECT_DIR$/eurekaServer/pom.xml" />
         <option value="$PROJECT_DIR$/eurekaService/pom.xml" />
+        <option value="$PROJECT_DIR$/gatewayServer/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/serviceOffering")
+@RequestMapping("/api/service-offering")
 public class ServiceOfferingController {
 
 
